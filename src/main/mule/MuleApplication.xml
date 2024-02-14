@@ -1,34 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="39b62f89-9ec0-4e8a-ba6e-754bb1b70236" basePath="/api" >
 		<http:listener-connection host="0.0.0.0" port="8081" readTimeout="3000"/>
 	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="9186200f-76a1-4ec8-81ac-3ae3005ee553" >
+		<db:my-sql-connection host="127.0.0.1" port="3306" user="root" password="root123" database="pruebaTecnica" />
+	</db:config>
 	<flow name="Clients-GET" doc:id="88c94d9b-c091-441b-9962-a41139a57bc7" >
 		<http:listener doc:name="Listener-GET" doc:id="0d3e95d8-e0aa-4f1f-8404-c96b11a7b501" config-ref="HTTP_Listener_config" path="/clients" allowedMethods="GET"/>
-		<set-payload value='#[{"message":"Clientes Get"}]' doc:name="Set Payload" doc:id="96eaa5b6-a206-4ca4-9cd1-30ad1c6cd306" />
+		<db:select doc:name="Select" doc:id="0e272600-3ba0-436b-bdbb-58b6fd912aac" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT *
+From clients]]></db:sql>
+		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="cc973dec-c426-40e2-815a-71b6d11bed1e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+payload map ( payload01 , indexOfPayload01 ) -> {
+	dni: payload01.dni,
+	nombre: payload01.name,
+	apellido: payload01.surname,
+	genero: payload01.gender ,
+	ciudad: payload01.city,
+	fecha_de_nacimiento: payload01.date_of_birth,
+	habilitado:payload01.enabled
+}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
 	<flow name="Clients-GET-ID" doc:id="037311ef-f948-4055-921f-7e82d5730e37" >
-		<http:listener doc:name="Listener" doc:id="494eed62-cd7e-4443-ab73-ce1812cee127" config-ref="HTTP_Listener_config" path="/clients/{ID}" allowedMethods="GET"/>
-		<set-payload value='#[{"message":"Clientes por DNI"}]' doc:name="Set Payload" doc:id="fe027159-50f0-44e5-b25c-6ac131cbbbb0" />
+		<http:listener doc:name="Listener" doc:id="494eed62-cd7e-4443-ab73-ce1812cee127" config-ref="HTTP_Listener_config" path="/clients/{dni}" allowedMethods="GET"/>
+		<db:select doc:name="Select" doc:id="7b48c472-e2ab-48a9-bb7e-992bcfcc926e" config-ref="Database_Config">
+			<db:sql><![CDATA[SELECT *
+FROM clients
+WHERE dni = :dni]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{dni: attributes.uriParams.dni}]]]></db:input-parameters>
+		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="83ef7866-2e7e-4281-979e-5fbc334fc8ca" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+payload map ( payload01 , indexOfPayload01 ) -> {
+	dni: payload01.dni,
+	nombre: payload01.name,
+	apellido: payload01.surname,
+	genero: payload01.gender ,
+	ciudad: payload01.city,
+	fecha_de_nacimiento: payload01.date_of_birth,
+	habilitado:payload01.enabled
+}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
