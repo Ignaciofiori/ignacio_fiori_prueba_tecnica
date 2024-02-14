@@ -1,0 +1,13 @@
+%dw 2.0
+
+type auto_ac6c3365_3250_44aa_a79b_153891e9f273_Input_Payload = {
+  gender: String, 
+  city: String, 
+  surname: String, 
+  date_of_birth: String, 
+  name: String, 
+  dni: Number, 
+  enabled?: Boolean, 
+  _?: Any
+}
+

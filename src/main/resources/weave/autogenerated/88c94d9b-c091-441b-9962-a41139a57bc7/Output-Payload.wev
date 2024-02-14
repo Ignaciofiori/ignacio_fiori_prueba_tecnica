@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_88c94d9b_c091_441b_9962_a41139a57bc7_Output_Payload = Array<{  gender: String,   city: String,   surname: String,   date_of_birth: String,   name: String,   dni: Number,   enabled?: Boolean,   _?: Any}>
+
