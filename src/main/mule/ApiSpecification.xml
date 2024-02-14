@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
-    <apikit:config name="prueba-tecninca-ignacio-fiori-config" api="resource::7cbc325b-190a-48dd-b2be-2659daabdd81:prueba-tecninca-ignacio-fiori:1.0.0:raml:zip:prueba-tecninca-ignacio-fiori.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="prueba-tecninca-ignacio-fiori-config" api="resource::7cbc325b-190a-48dd-b2be-2659daabdd81:prueba-tecninca-ignacio-fiori:1.0.3:raml:zip:prueba-tecninca-ignacio-fiori.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="prueba-tecninca-ignacio-fiori-main">
         <http:listener config-ref="HTTP_Listener_config" path="/">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -121,18 +121,18 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\clients\(dni):application\json:prueba-tecninca-ignacio-fiori-config">
-		<flow-ref doc:name="Flow Reference" doc:id="acd2a481-8257-405d-9dae-26a879dd24f0" name="Clients-PUT"/>
+        <flow-ref doc:name="Flow Reference" doc:id="acd2a481-8257-405d-9dae-26a879dd24f0" name="Clients-PUT" />
     </flow>
     <flow name="delete:\clients\(dni):prueba-tecninca-ignacio-fiori-config">
-		<flow-ref doc:name="Flow Reference" doc:id="52216aaa-9160-4123-bdf4-a4fe194a9d03" name="Clients-DELETE"/>
+        <flow-ref doc:name="Flow Reference" doc:id="52216aaa-9160-4123-bdf4-a4fe194a9d03" name="Clients-DELETE" />
     </flow>
     <flow name="get:\clients:prueba-tecninca-ignacio-fiori-config">
-		<flow-ref doc:name="Flow Reference" doc:id="0bc84b62-44d0-4fde-98d9-ea0e69ed3e90" name="Clients-GET"/>
+        <flow-ref doc:name="Flow Reference" doc:id="0bc84b62-44d0-4fde-98d9-ea0e69ed3e90" name="Clients-GET" />
     </flow>
     <flow name="get:\clients\(dni):prueba-tecninca-ignacio-fiori-config">
-		<flow-ref doc:name="Flow Reference" doc:id="df042766-f96a-49d7-8ba1-8824a41c61eb" name="Clients-GET-ID"/>
+        <flow-ref doc:name="Flow Reference" doc:id="df042766-f96a-49d7-8ba1-8824a41c61eb" name="Clients-GET-ID" />
     </flow>
     <flow name="post:\clients:application\json:prueba-tecninca-ignacio-fiori-config">
-		<flow-ref doc:name="Flow Reference" doc:id="897904ba-0a10-4fa5-9865-ebe4f2a2869d" name="Clients-POST"/>
+        <flow-ref doc:name="Flow Reference" doc:id="897904ba-0a10-4fa5-9865-ebe4f2a2869d" name="Clients-POST" />
     </flow>
 </mule>

@@ -55,13 +55,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>7cbc325b-190a-48dd-b2be-2659daabdd81</groupId>
-			<artifactId>prueba-tecninca-ignacio-fiori</artifactId>
-			<version>1.0.0</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
 			<version>1.9.2</version>
@@ -78,6 +71,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.30</version>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>7cbc325b-190a-48dd-b2be-2659daabdd81</groupId>
+			<artifactId>prueba-tecninca-ignacio-fiori</artifactId>
+			<version>1.0.3</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 

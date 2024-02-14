@@ -62,6 +62,19 @@ payload map ( payload01 , indexOfPayload01 ) -> {
 	</flow>
 	<flow name="Clients-POST" doc:id="291b0d4c-6410-48dc-9eb8-965cce6f737e" >
 		<http:listener doc:name="Listener" doc:id="7ef29bff-b0d0-46bf-8c88-bf3faf616d80" config-ref="HTTP_Listener_config" path="/clients" allowedMethods="POST"/>
+		<db:insert doc:name="Insert" doc:id="e1a7d750-558e-49aa-a7b7-c1f46dffd554" config-ref="Database_Config">
+			<db:sql ><![CDATA[INSERT INTO clients (dni,name,surname,gender,city,date_of_birth,enabled)
+VALUES(:dni,:name,:surname,:gender,:city,:date_of_birth,:enabled)]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	gender: payload.genero,
+	city: payload.ciudad,
+	surname: payload.apellido,
+	date_of_birth: payload.fecha_de_nacimiento,
+	name: payload.nombre,
+	dni: payload.dni,
+	enabled: payload.habilitado
+	}]]]></db:input-parameters>
+		</db:insert>
 		<set-payload value='#[{"message":"Clientes POST"}]' doc:name="Set Payload" doc:id="6b758aea-c788-403a-87b5-6147fa00cd21" />
 		<ee:transform doc:name="Transform Message" doc:id="12c66dd3-1e2a-402d-add9-e9d07ceea814" >
 			<ee:message >

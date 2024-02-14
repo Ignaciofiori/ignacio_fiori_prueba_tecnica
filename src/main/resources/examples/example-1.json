@@ -1,0 +1,19 @@
+
+    [{
+        "dni": 41726372,
+        "nombre": "Ignacio",
+        "apellido":"Fiori",
+        "genero": "M",
+        "ciudad": "Buenos Aires",
+        "fecha_de_nacimiento": "1999-02-11",
+        "habilitado": true
+       }, {
+        "dni": 41726232,
+        "nombre": "Luciano",
+        "apellido":"Corradini",
+        "genero": "M",
+        "ciudad": "Buenos Aires",
+        "fecha_de_nacimiento": "1999-02-11",
+        "habilitado": true
+       }
+       ]
