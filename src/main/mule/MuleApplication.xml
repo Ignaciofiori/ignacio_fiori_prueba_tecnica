@@ -93,18 +93,18 @@ payload]]></ee:set-payload>
 		</ee:transform>
 	</flow>
 	<flow name="Clients-PUT" doc:id="ac6c3365-3250-44aa-a79b-153891e9f273" >
-		<!-- [STUDIO:"Update"]<db:update doc:name="Update" doc:id="2a3b24a8-cb66-4dba-9d0e-55509b8f448a" config-ref="Database_Config">
+		<db:update doc:name="Update" doc:id="2a3b24a8-cb66-4dba-9d0e-55509b8f448a" config-ref="Database_Config">
 			<db:sql ><![CDATA[UPDATE clients
 SET name=:name, surname=:surname,gender=:gender,city=:city,date_of_birth=:date_of_birth
-WHERE dni = :dni&#93;&#93;></db:sql>
+WHERE dni = :dni]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{dni:attributes.uriParams.dni,
 name: payload.nombre,
 surname: payload.apellido,
 gender: payload.genero,
 city: payload.ciudad,
 date_of_birth: payload.fecha_de_nacimiento
-	}&#93;&#93;&#93;></db:input-parameters>
-		</db:update> [STUDIO] -->
+	}]]]></db:input-parameters>
+		</db:update>
 		<set-payload value='#[{"message":"Modificación de cliente exitosa"}]' doc:name="Set Payload" doc:id="86f57467-66d8-4341-8894-26df2517d691" />
 		<ee:transform doc:name="Transform Message" doc:id="cfa4892b-327c-4662-b5af-cc1676fd8c0f" >
 			<ee:message >

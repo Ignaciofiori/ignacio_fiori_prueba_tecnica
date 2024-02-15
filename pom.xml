@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>7cbc325b-190a-48dd-b2be-2659daabdd81</groupId>
 			<artifactId>prueba-tecninca-ignacio-fiori</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
