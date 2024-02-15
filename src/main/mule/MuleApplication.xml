@@ -121,7 +121,7 @@ payload]]></ee:set-payload>
 WHERE dni = :dni]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{dni: attributes.uriParams.dni}]]]></db:input-parameters>
 		</db:update>
-		<set-payload value='#[{"message":"Eliminación de cliente exitosa"}]' doc:name="Set Payload" doc:id="332bd83a-2d6d-4a81-a9ea-c5f5e6321487" />
+		<set-payload value='#[{"message":"Eliminacion de cliente exitosa"}]' doc:name="Set Payload" doc:id="332bd83a-2d6d-4a81-a9ea-c5f5e6321487" />
 		<ee:transform doc:name="Transform Message" doc:id="ff531384-b730-4b56-af73-ba062d938a37" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
