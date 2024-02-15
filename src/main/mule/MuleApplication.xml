@@ -15,15 +15,24 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 	<flow name="Clients-GET" doc:id="88c94d9b-c091-441b-9962-a41139a57bc7" >
 		<http:listener doc:name="Listener-GET" doc:id="0d3e95d8-e0aa-4f1f-8404-c96b11a7b501" config-ref="HTTP_Listener_config" path="/clients" allowedMethods="GET"/>
 		<db:select doc:name="Select" doc:id="0e272600-3ba0-436b-bdbb-58b6fd912aac" config-ref="Database_Config">
-			<db:sql ><![CDATA[SELECT *
-From clients]]></db:sql>
+			<db:sql ><![CDATA[SELECT * FROM clients
+WHERE 
+    (:gender IS NULL OR gender = :gender)
+    AND
+    (:city IS NULL OR city = :city)
+ORDER BY dni ASC]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{"gender": attributes.queryParams.gender,
+ "city":attributes.queryParams.city
+}]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="cc973dec-c426-40e2-815a-71b6d11bed1e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
+
+var clients = payload filter ((client) -> client.enabled == true)
 ---
-payload map ( payload01 , indexOfPayload01 ) -> {
+clients map ( payload01 , indexOfPayload01 ) -> {
 	dni: payload01.dni,
 	nombre: payload01.name,
 	apellido: payload01.surname,
@@ -47,8 +56,9 @@ WHERE dni = :dni]]></db:sql>
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
+var clients = payload filter ((client) -> client.enabled == true)
 ---
-payload map ( payload01 , indexOfPayload01 ) -> {
+clients map ( payload01 , indexOfPayload01 ) -> {
 	dni: payload01.dni,
 	nombre: payload01.name,
 	apellido: payload01.surname,
@@ -75,7 +85,7 @@ VALUES(:dni,:name,:surname,:gender,:city,:date_of_birth,:enabled)]]></db:sql>
 	enabled: payload.habilitado
 	}]]]></db:input-parameters>
 		</db:insert>
-		<set-payload value='#[{"message":"Clientes POST"}]' doc:name="Set Payload" doc:id="6b758aea-c788-403a-87b5-6147fa00cd21" />
+		<set-payload value='#[{"message":"Alta de cliente exitosa"}]' doc:name="Set Payload" doc:id="6b758aea-c788-403a-87b5-6147fa00cd21" />
 		<ee:transform doc:name="Transform Message" doc:id="12c66dd3-1e2a-402d-add9-e9d07ceea814" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
