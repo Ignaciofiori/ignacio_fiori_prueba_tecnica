@@ -82,7 +82,7 @@ VALUES(:dni,:name,:surname,:gender,:city,:date_of_birth,:enabled)]]></db:sql>
 	enabled: payload.habilitado
 	}]]]></db:input-parameters>
 		</db:insert>
-		<set-payload value='#[{"message":"Alta de cliente exitosa"}]' doc:name="Set Payload" doc:id="6b758aea-c788-403a-87b5-6147fa00cd21" />
+		<set-payload value='#[{"message":"Alta de cliente exitoosa"}]' doc:name="Set Payload" doc:id="6b758aea-c788-403a-87b5-6147fa00cd21" />
 		<ee:transform doc:name="Transform Message" doc:id="12c66dd3-1e2a-402d-add9-e9d07ceea814" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
