@@ -1,0 +1,90 @@
+#%RAML 1.0
+title: Prueba-Tecninca-Ignacio-Fiori
+
+types:
+  Structure-Clients: !include Structure-Clients.raml
+  Structure_CLients_Spanish: !include Structure_Clients_Spanish.raml
+  Structure_Clients_Spanish_No_Enabled: !include Structure_Clients_Spanish_No_Enabled.raml
+
+  newtype:
+    type:
+      type: any
+    examples:
+      input:
+        -
+          dni: 41736372
+          name: Ignacio
+          surname: Fiori
+          gender: M
+          city: Buenos Aires
+          date_of_birth: 1999-02-11
+          enabled?: true
+
+/clients:
+  get:
+    queryParameters:
+      gender:
+        required: false
+        enum:
+          - M 
+          - F
+      city:
+        required: false
+    responses:
+      200:
+        body:
+          aplicattion/json:
+            type: Structure-Clients[]
+            examples:
+              output: !include Client_Examples.raml
+
+  post:
+    body:
+      application/json:
+        type: Structure_CLients_Spanish
+        examples:
+          input: !include One_Client_Example_Spanish.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Alta de cliente exitosa
+  /{dni}:
+
+    get:
+      responses:
+          200:
+            body:
+              application/json:
+                type: Structure-Clients
+                examples: 
+                  output: !include One_Client_Example.raml
+
+    put:
+      body:
+        application/json:
+          type: Structure_Clients_Spanish_No_Enabled
+          examples:
+            input: !include One_Client_Example_Spanish_No_Enabled.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: Modificación de cliente exitosa
+
+    delete:
+          responses:
+            200:
+              body:
+                application/json:
+                  example:
+                    message: Eliminación de cliente exitosa
+
+        
+
+
+
+
+

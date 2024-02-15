@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  dni: number
+  nombre: string
+  apellido: string
+  genero: string
+  ciudad: string 
+  fecha_de_nacimiento:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'

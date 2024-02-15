@@ -1,0 +1,13 @@
+#%RAML 1.0 DataType
+
+type: object
+properties:
+  dni: number
+  name: string
+  surname: string
+  gender: string
+  city: string 
+  date_of_birth:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+  enabled?: boolean
